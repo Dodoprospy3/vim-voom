@@ -22,3 +22,9 @@ vim.opt.smartcase = true
 
 vim.opt.splitbelow = true
 vim.opt.splitright = true
+
+vim.opt.undofile = true
+vim.opt.undodir = vim.fn.stdpath("data") .. "/undo"
+if vim.fn.isdirectory(vim.o.undodir) == 0 then
+    vim.fn.mkdir(vim.o.undodir, "p")
+end
