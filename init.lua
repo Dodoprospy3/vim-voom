@@ -1,5 +1,6 @@
 require("config.options")
 require("config.keymaps")
+require("config.neomd")
 require("config.lazy")
 require("config.lsp")
 require("config.transparency")
