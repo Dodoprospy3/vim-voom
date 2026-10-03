@@ -1,3 +1,5 @@
+vim.opt.guicursor = "a:block"
+
 vim.opt.number = true
 vim.opt.relativenumber = true
 
