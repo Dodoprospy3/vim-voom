@@ -38,7 +38,7 @@ return {
                     "clangd",
 
                     -- JavaScript / TypeScript
-                    "ts_ls",
+                    "vtsls",
 
                     -- Web
                     "html",
@@ -54,8 +54,12 @@ return {
                 },
             })
 
-            vim.lsp.config("ts_ls", {
-                root_markers = { "package.json", "tsconfig.json", "jsconfig.json", ".git" },
+            vim.lsp.config("vtsls", {
+                root_dir = function(bufnr, on_dir)
+                    local root =
+                        vim.fs.root(bufnr, { "package.json", "tsconfig.json", "jsconfig.json", ".git" })
+                    on_dir(root or vim.fn.getcwd())
+                end,
             })
 
             vim.lsp.config("emmet_ls", {
@@ -97,7 +101,7 @@ return {
                 "clangd",
 
                 -- JavaScript / TypeScript
-                "ts_ls",
+                "vtsls",
 
                 -- HTML / CSS
                 "html",

@@ -18,8 +18,8 @@ vim.api.nvim_set_hl(0, "Visual", {
     fg = "#ffffff",
     bg = "#666666",
 })
-vim.opt.shortmess:append("I")
 vim.keymap.set("n", "<F5>", ":!python %<CR>", { desc = "Run Python file" })
+
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.incsearch = true
