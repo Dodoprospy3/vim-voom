@@ -54,6 +54,16 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
 })
 
+vim.api.nvim_create_autocmd("BufLeave", {
+    pattern = "*",
+    callback = function(args)
+        if vim.bo[args.buf].filetype == "netrw" then
+            vim.wo.winhighlight = ""
+            vim.wo.cursorlineopt = "number"
+        end
+    end,
+})
+
 map("x", "<leader>p", '"_dP')
 
 map("n", "<C-d>", "<C-d>zz")

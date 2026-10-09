@@ -20,6 +20,12 @@ vim.api.nvim_set_hl(0, "Visual", {
 })
 vim.keymap.set("n", "<F5>", ":!python %<CR>", { desc = "Run Python file" })
 
+vim.opt.guicursor = {
+    "n-v-c:block-blinkwait500-blinkon500-blinkoff500",
+    "i-ci-ve:block-blinkwait500-blinkon500-blinkoff500",
+    "r-cr:block-blinkwait500-blinkon500-blinkoff500",
+}
+
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.incsearch = true
