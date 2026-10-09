@@ -7,7 +7,7 @@ return {
             local blink = require("blink.cmp")
 
             neocodeium.setup({
-                show_label = true,
+                show_label = false,
                 silent = false,
                 filter = function()
                     return not blink.is_visible()

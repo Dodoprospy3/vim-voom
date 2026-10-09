@@ -5,6 +5,8 @@ local map = vim.keymap.set
 map("n", "<leader>w", "<cmd>w<CR>")
 map("n", "<leader>q", "<cmd>q<CR>")
 
+local prev_buf = nil
+
 map("n", "<leader>e", function()
     local netrw_win = nil
     for _, w in ipairs(vim.api.nvim_list_wins()) do
@@ -17,10 +19,15 @@ map("n", "<leader>e", function()
         if #vim.api.nvim_list_wins() > 1 then
             vim.api.nvim_win_close(netrw_win, true)
         else
-            vim.cmd("enew")
+            if prev_buf and vim.api.nvim_buf_is_valid(prev_buf) then
+                vim.api.nvim_set_current_buf(prev_buf)
+            else
+                vim.cmd("enew")
+            end
         end
         return
     end
+    prev_buf = vim.api.nvim_get_current_buf()
     vim.cmd("Explore")
 end, { desc = "Toggle netrw" })
 
@@ -46,10 +53,10 @@ vim.api.nvim_create_autocmd("FileType", {
     callback = function()
         vim.api.nvim_set_hl(0, "CursorLineNetrw", { bg = "#2a2d42" })
         vim.wo.cursorline = true
-        vim.wo.cursorlineopt = "line"
+        vim.wo.cursorlineopt = "both"
         vim.wo.winhighlight = "CursorLine:CursorLineNetrw"
-        vim.wo.number = false
-        vim.wo.relativenumber = false
+        vim.wo.number = true
+        vim.wo.relativenumber = true
         vim.wo.signcolumn = "no"
     end,
 })
@@ -60,6 +67,8 @@ vim.api.nvim_create_autocmd("BufLeave", {
         if vim.bo[args.buf].filetype == "netrw" then
             vim.wo.winhighlight = ""
             vim.wo.cursorlineopt = "number"
+            vim.wo.number = true
+            vim.wo.relativenumber = true
         end
     end,
 })
